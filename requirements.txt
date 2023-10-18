@@ -1,0 +1,21 @@
+User
+    username:string
+    first_name:string
+    last_name:string
+    email:string
+    phone_number:integer
+    password:string
+
+Product
+    name:string
+    description:text
+    type:references
+    price:integer
+
+Product_Type
+    name:string
+    description:text
+
+Image
+    name:string
+    path:string
