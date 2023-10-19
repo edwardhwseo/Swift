@@ -1,21 +1,20 @@
 User
-    username:string
+    email:string
+    password:string
     first_name:string
     last_name:string
-    email:string
     phone_number:integer
-    password:string
 
 Product
     name:string
+    category:references
+    brand:references
     description:text
-    type:references
     price:integer
+    image:string
 
-Product_Type
+Product_Category
     name:string
-    description:text
 
-Image
+Brand
     name:string
-    path:string
