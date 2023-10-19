@@ -8,7 +8,33 @@
 
 require 'csv'
 
-csv_file_path = Rails.root.join('db', 'data.csv')
-csv = CSV.read(csv_file_path, headers: true)
+Product.delete_all
+Category.delete_all
+Brand.delete_all
 
-print(csv[0]['product_category_tree'].split('>>')[0].tr('["%', '').strip())
+csv_file_path = Rails.root.join('db', 'data.csv')
+count = 0
+CSV.foreach(csv_file_path, headers: true) do |row|
+    category = Category.find_or_create_by(
+        name: row['product_category_tree'].split('>>')[0].tr('["%', '').strip()
+    )
+    brand = Brand.find_or_create_by(
+        name: row['brand']
+    )
+
+    if row['image'] != nil
+        image = row['image'].split(',')[0].tr('["', '')
+    else
+        image = row['image']
+    end
+
+    product = Product.find_or_create_by(
+        name: row['product_name'],
+        description: row['description'],
+        category: category,
+        brand: brand,
+        price: row['retail_price'],
+        sale_price: row['discounted_price'],
+        image: image
+    )
+end

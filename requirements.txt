@@ -10,10 +10,11 @@ Product
     category:references
     brand:references
     description:text
-    price:integer
+    price:float
+    sale_price:float
     image:string
 
-Product_Category
+Category
     name:string
 
 Brand
