@@ -2,7 +2,7 @@
 <div class="d-flex flex-wrap">
     <% @products.each do |p| %>
     <div class="card" style="width: 15rem; margin: 10px;">
-        <%= image_tag p.image, class: "card-img-top img-fixed-height" %>
+        <%= image_tag p.image, class: "card-img-top img-fixed-height bg-light" %>
         <div class="card-body">
             <h5 class="card-title"><%= p.name %></h5>
             <p class="card-text">
