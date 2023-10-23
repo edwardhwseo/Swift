@@ -4,6 +4,10 @@ User
     first_name:string
     last_name:string
     phone_number:integer
+    type:references
+
+UserType
+    name:string
 
 Product
     name:string
@@ -19,3 +23,7 @@ Category
 
 Brand
     name:string
+
+Orders
+    user:references
+    products:references
