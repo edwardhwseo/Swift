@@ -1,4 +1,20 @@
-<h1>Products#index</h1>
-<% @products.each do |p| %>
-    <%= image_tag p.image %>
-<% end %>
+<%= paginate @products %>
+
+<h1>Products</h1>
+<div class="d-flex flex-wrap">
+    <% @products.each do |p| %>
+    <div class="card" style="width: 15rem; margin: 10px;">
+        <%= image_tag p.image, class: "card-img-top img-fixed-height bg-light" %>
+        <div class="card-body">
+            <h5 class="card-title"><%= p.name %></h5>
+            <p class="card-text">
+                <% if p.description.length > 50 %>
+                    <%= p.description[0..50]... %></p>
+                <% else %>
+                    <%= p.description %>
+                <% end %>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+    </div>
+    <% end %>
+</div>
