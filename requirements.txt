@@ -12,6 +12,7 @@ Product
     description:text
     price:float
     sale_price:float
+    stock_quantity:integer
     image:string
 
 Category
@@ -19,3 +20,11 @@ Category
 
 Brand
     name:string
+
+Order
+    user:references
+    order_products:references
+
+OrderItem
+    order:references
+    product:references
