@@ -1,15 +1,15 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white d-flex justify-content-center">
-  <a class="navbar-brand mx-3" href="/home/index"><%= image_tag "logo_2.jpg", size: "100" %></a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom d-flex justify-content-center p-0">
+  <a class="navbar-brand mx-3" href="/home/index"><%= image_tag "swift_logo.png", size: "100" %></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
   <span class="navbar-toggler-icon"></span>
   </button>
-      <%= form_with(method: :get, local: true, class: "form my-2 my-lg-0") do %>
+      <%= form_with(method: :get, local: true, class: "form my-lg-0") do %>
     <div class="row mx-1 my-3">
         <div class="col">
             <%= text_field_tag(:keywords, nil, class:"form-control mr-sm-2", placeholder: "Search", style: "width: 450px;") %>
         </div>
         <div class="col">
-            <%= submit_tag("Search", class: "btn btn-primary my-2 my-sm-0")%>
+            <%= submit_tag("Search", class: "btn btn-primary my-sm-0")%>
         </div>
     </div>
     <% end %>
