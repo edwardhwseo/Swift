@@ -3,7 +3,7 @@ User
     password:string
     first_name:string
     last_name:string
-    phone_number:integer
+    phone_number:string
 
 Product
     name:string
