@@ -23,8 +23,8 @@ Brand
 
 Order
     user:references
-    order_products:references
 
 OrderItem
     order:references
     product:references
+    quantity:integer
