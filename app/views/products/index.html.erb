@@ -6,7 +6,8 @@
     <div class="card" style="width: 15rem; margin: 10px;">
         <%= image_tag p.image, class: "card-img-top img-fixed-height bg-light" %>
         <div class="card-body">
-            <h5 class="card-title"><%= p.name %></h5>
+            <h6 class="card-title"><%= p.name %></h6>
+            <h5>$<%= p.price %></h5>
             <p class="card-text">
                 <% if p.description.length > 50 %>
                     <%= p.description[0..50]... %></p>
