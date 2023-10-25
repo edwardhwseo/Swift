@@ -1,2 +1,10 @@
-<h1>Products#show</h1>
-<p>Find me in app/views/products/show.html.erb</p>
+<div class="d-flex justify-content-center m-3">
+    <div class="me-5">
+        <%= image_tag @product.image, size: "300" %>
+    </div>
+    <div>
+        <h4><%= @product.name%></h4>
+        <h5>$<%= @product.price %></h5>
+        <%= @product.description %>
+    </div>
+</div>

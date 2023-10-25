@@ -18,3 +18,7 @@
     height: 150px;
     object-fit: contain;
 }
+
+.product:hover {
+    color: #bf951e;
+  }

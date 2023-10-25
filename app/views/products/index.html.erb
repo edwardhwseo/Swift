@@ -4,10 +4,10 @@
 <div class="d-flex justify-content-center flex-wrap mb-3">
     <% @products.each do |p| %>
     <div class="card" style="width: 15rem; margin: 10px;">
-        <%= image_tag p.image, class: "card-img-top img-fixed-height bg-light" %>
+        <%= link_to image_tag(p.image, :class => "card-img-top img-fixed-height bg-light"), p  %>
         <div class="card-body">
-            <h6 class="card-title"><%= p.name %></h6>
-            <h5>$<%= p.price %></h5>
+            <%= link_to p.name, p, class: "h5 card-title text-decoration-none product" %>
+            <h5 class="mt-2">$<%= p.price %></h5>
             <p class="card-text">
                 <% if p.description.length > 50 %>
                     <%= p.description[0..50]... %></p>
