@@ -38,3 +38,5 @@ CSV.foreach(csv_file_path, headers: true) do |row|
         image: image
     )
 end
+
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
