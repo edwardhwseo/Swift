@@ -1,10 +1,13 @@
 <p style="color: green"><%= notice %></p>
-
+<div class="mx-auto" style="width: 200px;">
 <h1>Pages</h1>
 
 <div id="pages">
   <% @pages.each do |page| %>
     <%= render page %>
+    <div>
+      <%= page.name %>
+    </div>
     <p>
       <%= link_to "Show this page", page %>
     </p>
@@ -12,3 +15,4 @@
 </div>
 
 <%= link_to "New page", new_page_path %>
+</div>
