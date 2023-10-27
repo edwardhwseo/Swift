@@ -1,0 +1,6 @@
+<h1>Categories#index</h1>
+<div>
+    <% @categories.each do |c| %>
+    <p><%= link_to c.name, c %></p>
+    <% end %>
+</div>

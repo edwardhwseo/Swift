@@ -1,0 +1,25 @@
+<div class="d-flex justify-content-center m-3">
+    <h1><%= @category.name %></h1>
+</div>
+<div class="d-flex justify-content-center flex-wrap mb-3">
+    <% @products.each do |product| %>
+    <div class="card" style="width: 15rem; margin: 10px;">
+    <% if product.image.present? %>
+        <%= link_to image_tag(product.image, :class => "card-img-top img-fixed-height bg-light"), product  %>
+    <% end %>
+        <div class="card-body">
+            <%= link_to product.name, product, class: "h5 card-title text-decoration-none product" %>
+            <h5 class="mt-2">$<%= product.price %></h5>
+            <p class="card-text">
+                <% if product.description.to_s.length > 50 %>
+                    <%= product.description[0..50]... %></p>
+                <% else %>
+                    <%= product.description %>
+                <% end %>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+    </div>
+    <% end %>
+</div>
+
+<%= paginate @products %>
