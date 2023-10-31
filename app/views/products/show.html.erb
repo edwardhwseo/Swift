@@ -1,10 +1,19 @@
-<div class="d-flex justify-content-center m-3">
-    <div class="me-5">
-        <%= image_tag @product.image, size: "300" %>
-    </div>
-    <div>
-        <h4><%= @product.name%></h4>
-        <h5>$<%= @product.price %></h5>
-        <%= @product.description %>
+<div class="mx-auto mt-3" style="width: 1280px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb m-0">
+            <li class="breadcrumb-item"><a class="text-decoration-none" href="/products">Home</a></li>
+            <li class="breadcrumb-item active"><a class="text-decoration-none" href="/categories/<%= @category.id %>"><%= @category.name %></a></li>
+            <li class="breadcrumb-item active" aria-current="page"><%= @product.name %></li>
+        </ol>
+    </nav>
+    <div class="d-flex justify-content-center mt-4">
+        <div class="me-5">
+            <%= image_tag @product.image, size: "300" %>
+        </div>
+        <div>
+            <h4><%= @product.name%></h4>
+            <h5>$<%= @product.price %></h5>
+            <%= @product.description %>
+        </div>
     </div>
 </div>
