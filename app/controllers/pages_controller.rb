@@ -9,6 +9,7 @@ class PagesController < ApplicationController
   # GET /pages/1 or /pages/1.json
   def show
     @page = Page.find(params[:id])
+    @products = Product.where('sale_price < price').order(:id).page params[:page]
   end
 
   # GET /pages/new

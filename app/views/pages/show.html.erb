@@ -4,7 +4,9 @@
 <div class="mx-auto" style="width: 1000px;">
   <h1 class="d-flex justify-content-center"><%= @page.name %></h1>
   <p class="d-flex justify-content-center"><%= @page.content %></p>
-  <% if(@page.name == 'Contact') %>
+  <% if @page.name == 'Contact' %>
     <%= render partial: 'common/form' %>
+  <% elsif @page.name == 'Deals' %>
+    <%= render partial: 'common/product' %>
   <% end %>
 </div>
