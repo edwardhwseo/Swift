@@ -6,7 +6,14 @@
     <% end %>
         <div class="card-body">
             <%= link_to p.name, p, class: "h5 card-title text-decoration-none product" %>
-            <h5 class="mt-2">$<%= p.price %></h5>
+            <h5 class="mt-2">
+            <% if !(p.sale_price < p.price) %>
+                $<%= p.price %>
+            <% else %>
+                Discount: $<%= p.sale_price %>
+            <% end %>
+
+            </h5>
             <p class="card-text">
                 <% if p.description.to_s.length > 50 %>
                     <%= p.description[0..50]... %></p>
