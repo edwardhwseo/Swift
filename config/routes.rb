@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  # get 'home/index'
   # get 'categories/index'
   # get 'categories/show'
+  root to: 'home#index'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   resources :pages
