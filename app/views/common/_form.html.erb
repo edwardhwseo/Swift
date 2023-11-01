@@ -1,21 +1,23 @@
-<%= form_with scope: :contact_form, method: :post, local: true, class: "container" do |form| %>
-  <div class="form-group mb-2">
-    <%= form.label :name %>
-    <%= form.text_field :name, class: "form-control" %>
-  </div>
-  <div class="form-group mb-2">
-    <%= form.label :last_name %>
-    <%= form.text_field :last_name, class: "form-control" %>
-  </div>
-  <div class="form-group mb-2">
-    <%= form.label :email %>
-    <%= form.email_field :email, class: "form-control" %>
-  </div>
-  <div class="form-group mb-2">
-    <%= form.label :message %>
-    <%= form.text_area :message, class: "form-control" %>
-  </div>
-  <div class="text-center">
-    <%= form.submit "Submit", class: "btn btn-primary" %>
-  </div>
-<% end %>
+<div class="mx-auto" style="width: 1000px;">
+    <%= form_with scope: :contact_form, method: :post, local: true, class: "container" do |form| %>
+    <div class="form-group mb-2">
+        <%= form.label :name %>
+        <%= form.text_field :name, class: "form-control" %>
+    </div>
+    <div class="form-group mb-2">
+        <%= form.label :last_name %>
+        <%= form.text_field :last_name, class: "form-control" %>
+    </div>
+    <div class="form-group mb-2">
+        <%= form.label :email %>
+        <%= form.email_field :email, class: "form-control" %>
+    </div>
+    <div class="form-group mb-2">
+        <%= form.label :message %>
+        <%= form.text_area :message, class: "form-control" %>
+    </div>
+    <div class="text-center">
+        <%= form.submit "Submit", class: "btn btn-primary" %>
+    </div>
+    <% end %>
+</div>
