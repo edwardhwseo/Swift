@@ -12,12 +12,12 @@ class PagesController < ApplicationController
     @products = Product.where('sale_price < price').order(:id).page params[:page]
   end
 
-  # # GET /pages/new
+  # GET /pages/new
   # def new
   #   @page = Page.new
   # end
 
-  # # GET /pages/1/edit
+  # GET /pages/1/edit
   # def edit
   # end
 

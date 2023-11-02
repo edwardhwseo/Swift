@@ -31,23 +31,14 @@
       <li class="nav-item active">
         <a class="nav-link text-light" href="/pages/3">Deals</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link text-light" href="/categories/800">Clothing</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-light" href="/categories/801">Furniture</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-light" href="/categories/847">Home & Kitchen</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-light" href="/categories/848">Computers</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-light" href="/categories/807">Beauty</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-light" href="/categories/806">Fitness</a>
-      </li>
+      <p class="nav-link text-light"> | </p>
+      <% categories.each_with_index do |c, index| %>
+        <li class="nav-item">
+          <%= link_to c.name, category_path(c.id), class: "nav-link text-light" %>
+        </li>
+        <% if index != categories.size - 1 %>
+          <p class="nav-link text-light"> | </p>
+        <% end %>
+      <% end %>
     </ul>
 </nav>

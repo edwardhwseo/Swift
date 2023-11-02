@@ -13,7 +13,7 @@
   </head>
 
   <body>
-    <%= render partial: 'common/navbar' %>
+    <%= render partial: 'common/navbar', locals: { categories: @categories}%>
     <%= yield %>
     <%= render partial: 'common/footer' %>
   </body>
