@@ -13,7 +13,9 @@ Category.delete_all
 Brand.delete_all
 
 csv_file_path = Rails.root.join('db', 'data.csv')
-count = 0
+image_count = 0
+discount_count = 0
+price_count = 0
 CSV.foreach(csv_file_path, headers: true) do |row|
     category = Category.find_or_create_by(
         name: row['product_category_tree'].split('>>')[0].tr('["%', '').strip()
@@ -28,15 +30,27 @@ CSV.foreach(csv_file_path, headers: true) do |row|
         image = row['image']
     end
 
+    if row['retail_price'] == nil && row['discounted_price'] == nil
+        price = 0
+        discount = 0
+    else
+        price = row['retail_price']
+        sale_price = row['discounted_price']
+    end
+
+
+
     product = Product.find_or_create_by(
         name: row['product_name'],
         description: row['description'],
         category: category,
         brand: brand,
-        price: row['retail_price'],
-        sale_price: row['discounted_price'],
+        price: price,
+        sale_price: sale_price,
         image: image
     )
 end
 
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+if AdminUser.count != 1
+    AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+end
