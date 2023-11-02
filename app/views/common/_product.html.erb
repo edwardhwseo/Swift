@@ -8,11 +8,11 @@
             <%= link_to p.name, p, class: "h5 card-title text-decoration-none product" %>
             <h5 class="mt-2">
             <% if !(p.sale_price < p.price) %>
-                $<%= p.price %>
+                <p>$<%= p.price %></p>
+                <%= p.price - p.sale_price%>
             <% else %>
-                Discount: $<%= p.sale_price %>
+                <p class="text-danger">$<%= p.sale_price %>[-<%= ((p.price - p.sale_price) / p.price * 100).round %>%]</p>
             <% end %>
-
             </h5>
             <p class="card-text">
                 <% if p.description.to_s.length > 50 %>
