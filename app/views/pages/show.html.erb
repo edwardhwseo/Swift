@@ -4,14 +4,14 @@
 <div class="mx-auto mt-3" style="width: 1280px;">
   <nav aria-label="breadcrumb">
       <ol class="breadcrumb m-0">
-          <li class="breadcrumb-item"><a class="text-decoration-none" href="/products">Home</a></li>
+          <li class="breadcrumb-item"><a class="text-decoration-none" href="/">Home</a></li>
           <li class="breadcrumb-item active" aria-current="page"><%= @page.name %></li>
       </ol>
   </nav>
 </div>
 <div class="mx-auto" style="width: 1000px;">
   <h1 class="d-flex justify-content-center"><%= @page.name %></h1>
-  <p class="d-flex justify-content-center"><%= @page.content %></p>
+  <p class="d-flex justify-content-center m-1"><%= @page.content %></p>
 </div>
 <% if @page.name == 'Contact' %>
   <%= render partial: 'common/form' %>

@@ -23,7 +23,7 @@
     </ul>
 </nav>
 
-<nav class="navbar navbar-expand-lg navbar-light border-bottom d-flex justify-content-center p-0" style="background-color: rgba(38,50,56,1.0);">
+<nav class="navbar navbar-expand-lg navbar-light d-flex justify-content-center p-0 border-0" style="background-color: rgba(38,50,56,1.0);">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
   <span class="navbar-toggler-icon"></span>
   </button>
@@ -31,13 +31,13 @@
       <li class="nav-item active">
         <a class="nav-link text-light" href="/pages/3">Deals</a>
       </li>
-      <p class="nav-link text-light"> | </p>
+      <p class="nav-link text-light m-0"> | </p>
       <% categories.each_with_index do |c, index| %>
         <li class="nav-item">
           <%= link_to c.name, category_path(c.id), class: "nav-link text-light" %>
         </li>
         <% if index != categories.size - 1 %>
-          <p class="nav-link text-light"> | </p>
+          <span class="nav-link text-light"> | </span>
         <% end %>
       <% end %>
     </ul>
