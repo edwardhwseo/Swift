@@ -10,6 +10,7 @@ class PagesController < ApplicationController
   def show
     @page = Page.find(params[:id])
     @products = Product.where('sale_price < price').order(:id).page params[:page]
+    @new_products = Product.all.order(created_at: :desc).page params[:page]
   end
 
   # GET /pages/new
