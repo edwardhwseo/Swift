@@ -14,6 +14,18 @@
             <h4><%= @product.name%></h4>
             <h5>$<%= @product.price %></h5>
             <%= @product.description %>
+        <div class="pt-2">
+            <% if cart.include?(@product) %>
+                <%= button_to cart_path(@product), method: :delete do %>
+                    Remove from cart
+                <% end %>
+            <% else %>
+                <%= form_with url: cart_index_path, method: :post do %>
+                    <%= hidden_field_tag(:id, @product.id) %>
+                    <%= button_tag 'Add to Cart', class: "btn btn-primary" %>
+                <% end %>
+            <% end %>
+        </div>
         </div>
     </div>
 </div>
