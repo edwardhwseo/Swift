@@ -1,0 +1,6 @@
+<h1>Search Results: <%= @query %></h1>
+<% if @products.any? %>
+  <%= render partial: 'common/product' %>
+<% else %>
+  <p>No products found.</p>
+<% end %>
