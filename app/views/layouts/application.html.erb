@@ -15,6 +15,6 @@
   <body class="m-1">
     <%= render partial: 'common/navbar', locals: { categories: @categories}%>
     <%= yield %>
-    <%= render partial: 'common/footer' %>
+    <%= render partial: 'common/footer', locals: { categories: @categories}  %>
   </body>
 </html>
