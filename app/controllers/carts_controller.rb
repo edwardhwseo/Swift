@@ -6,8 +6,8 @@ class CartsController < ApplicationController
         id = params[:id].to_i
         session[:shopping_cart] << id unless session[:shopping_cart].include?(id) # Pushes id onto the end of array
         product = Product.find(id)
-        flash[:notice] = "+ #{product.name} added to cart..."
-        redirect_to root_path
+        flash[:notice] = "#{product.name} added to cart"
+        # redirect_to root_path
     end
 
     # DELETE /cart/:id

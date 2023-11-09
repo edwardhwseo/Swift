@@ -16,16 +16,23 @@
             <%= @product.description %>
         <div class="pt-2">
             <% if cart.include?(@product) %>
-                <%= button_to cart_path(@product), method: :delete do %>
+                <%= button_to cart_path(@product), class:"btn btn-primary", method: :delete do %>
                     Remove from cart
                 <% end %>
             <% else %>
-                <%= form_with url: cart_index_path, method: :post do %>
+                <%= form_with url: carts_path, method: :post do %>
                     <%= hidden_field_tag(:id, @product.id) %>
                     <%= button_tag 'Add to Cart', class: "btn btn-primary" %>
                 <% end %>
             <% end %>
         </div>
+        <%= debug session[:shopping_cart] %>
+        <p>You have added <%= pluralize cart, 'product' %> to the cart</p>
+        <% if flash[:notice] %>
+        <p>
+        <%= flash[:notice] %>
+        </p>
+        <% end %>
         </div>
     </div>
 </div>
