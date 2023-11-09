@@ -1,4 +1,8 @@
 class CartsController < ApplicationController
+    def index
+        @products = Product.where(id: session[:shopping_cart]).order(:id).page params[:page]
+    end
+
     #POST /carts
     def create
         # log product id to the terminal logger

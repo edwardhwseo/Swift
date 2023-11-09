@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :pages
   resources :products
   resources :categories
-  resources :carts, only: %i[create destroy]
+  resources :carts, only: %i[index create destroy]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

@@ -1,0 +1,19 @@
+<div class="mx-auto mt-3" style="width: 1280px;">
+  <nav aria-label="breadcrumb">
+      <ol class="breadcrumb m-0">
+          <li class="breadcrumb-item"><a class="text-decoration-none" href="/">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Cart</li>
+      </ol>
+  </nav>
+</div>
+<% if cart.present? %>
+    <div class="d-flex justify-content-center pb-4">
+        <h2>Your Swift Cart</h2>
+    </div>
+    <%= render partial: 'common/product' %>
+<% else %>
+    <div class="text-center pb-4">
+        <h4>Your Swift Cart is empty</h4>
+        <a href="/pages/3" class="text-decoration-none">Shop today's deals</a>
+    </div>
+<% end %>
