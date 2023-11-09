@@ -26,10 +26,8 @@
                 <% end %>
             <% end %>
         </div>
-        <%= debug session[:shopping_cart] %>
-        <p>You have added <%= pluralize cart, 'product' %> to the cart</p>
         <% if flash[:notice] %>
-        <p>
+        <p class="text-danger pt-2">
         <%= flash[:notice] %>
         </p>
         <% end %>
