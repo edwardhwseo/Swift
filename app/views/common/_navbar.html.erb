@@ -1,18 +1,17 @@
-<nav class="navbar navbar-expand-lg navbar-light border-bottom d-flex justify-content-center p-0" style="background-color: rgba(207,216,220,1.0);">
-  <a class="navbar-brand mx-3" href="/"><%= image_tag "swift_logo.png", size: "100" %></a>
+<nav class="navbar navbar-expand-lg navbar-light border border-bottom-0 rounded-top d-flex justify-content-center p-0">
+  <a class="navbar-brand mx-3" href="/"><%= image_tag "swift.png", size: "100" %></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
   <span class="navbar-toggler-icon"></span>
   </button>
-  <%= form_with(url: '/products/search', method: 'get', class: 'form my-lg-0') do |form| %>
+      <%= form_with(method: :get, local: true, class: "form my-lg-0") do %>
     <div class="row mx-1 my-3">
-      <div class="col">
-        <%= form.text_field :query, class: 'form-control mr-sm-2', placeholder: 'Search', style: 'width: 450px;' %>
-      </div>
-      <div class="col">
-        <%= form.submit 'Search', :name => nil, class: 'btn btn-primary my-sm-0' %>
-      </div>
+        <div class="col pe-1">
+            <%= text_field_tag(:keywords, nil, class:"form-control mr-sm-2", placeholder: "Search", style: "width: 450px;") %>
+        </div>
+        <div class="col ps-0">
+            <%= submit_tag("Search", class: "btn btn-primary my-sm-0")%>
+        </div>
     </div>
-<<<<<<< HEAD
     <% end %>
     <ul class="navbar-nav">
       <li class="nav-item active">
@@ -28,34 +27,27 @@
         </a>
       </li>
     </ul>
-=======
-  <% end %>
-  <ul class="navbar-nav">
-    <li class="nav-item active">
-      <a class="nav-link text-dark" href="#"><i class="bi bi-person mx-1"></i>Sign In</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link text-dark" href="#"><i class="bi bi-cart me-1"></i>Cart</a>
-    </li>
-  </ul>
->>>>>>> acf81ff1840ac055eb5617211bd83b5b5183be49
 </nav>
 
-<nav class="navbar navbar-expand-lg navbar-light border-bottom d-flex justify-content-center p-0" style="background-color: rgba(38,50,56,1.0);">
+<nav class="navbar navbar-expand-lg navbar-light d-flex justify-content-center p-0 border-top" style="background-color: rgba(18, 18, 18, 1)">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
   <span class="navbar-toggler-icon"></span>
   </button>
     <ul class="navbar-nav">
       <li class="nav-item active">
+        <a class="nav-link text-light" href="/pages/4">New</a>
+      </li>
+      <p class="nav-link text-light m-0"> | </p>
+      <li class="nav-item active">
         <a class="nav-link text-light" href="/pages/3">Deals</a>
       </li>
-      <p class="nav-link text-light"> | </p>
+      <p class="nav-link text-light m-0"> | </p>
       <% categories.each_with_index do |c, index| %>
         <li class="nav-item">
           <%= link_to c.name, category_path(c.id), class: "nav-link text-light" %>
         </li>
         <% if index != categories.size - 1 %>
-          <p class="nav-link text-light"> | </p>
+          <span class="nav-link text-light"> | </span>
         <% end %>
       <% end %>
     </ul>
