@@ -14,7 +14,19 @@
             <h4><%= @product.name%></h4>
             <h5>$<%= @product.price %></h5>
             <%= @product.description %>
-        <div class="pt-2">
+        <div class="row d-flex align-items-center pt-4">
+            <div class="col-1">
+                Quantity:
+            </div>
+        <div class="col-1" size="100">
+            <select class="form-select" aria-label="Quantity" style="width: 58px;">
+                <option selected value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+        </div>
+        </div>
+        <div class="pt-3">
             <% if cart.include?(@product) %>
                 <%= button_to cart_path(@product), class:"btn btn-primary", method: :delete do %>
                     Remove from cart
