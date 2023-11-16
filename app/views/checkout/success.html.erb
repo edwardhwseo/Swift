@@ -1,0 +1,11 @@
+<div class="pt-4 pb-5 text-center">
+    <div class="d-flex justify-content-center py-2">
+        <%= image_tag "success.png", width: "40", height: "auto" %>
+    </div>
+    <h4 class="py-1">Your order was confirmed!</h4>
+    <h6 class="pb-1">Order ID: <%= @session.id %></h6>
+    <p class="pb-1">We have sent your order confirmation and invoice to {email@gmail.com}</p>
+    <div class="d-flex justify-content-center">
+        <a href="/pages/3" class="btn btn-outline-dark tex-decoration-none">Continue shopping</a>
+    </div>
+</div>
