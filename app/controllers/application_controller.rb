@@ -11,10 +11,15 @@ class ApplicationController < ActionController::Base
     private
 
     def initialize_session
-        session[:shopping_cart] ||= []
+        session[:shopping_cart] ||= {}
     end
 
     def cart
-        Product.find(session[:shopping_cart])
+        if session[:shopping_cart].is_a?(Hash)
+            product_ids = session[:shopping_cart].keys
+            Product.where(id: product_ids)
+        else
+            []
+        end
     end
 end

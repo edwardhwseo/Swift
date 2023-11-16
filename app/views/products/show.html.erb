@@ -14,39 +14,38 @@
             <h4><%= @product.name%></h4>
             <h5>$<%= @product.price %></h5>
             <%= @product.description %>
-        <div class="row d-flex align-items-center pt-4">
-            <div class="col-1">
-                Quantity:
-            </div>
-        <div class="col-1" size="100">
-            <select class="form-select" aria-label="quantity" style="width: 58px;">
-                <option selected value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-            </select>
-        </div>
-        </div>
         <div class="pt-3">
-            <% if cart.include?(@product) %>
-                <%= button_to cart_path(@product), class:"btn btn-primary", method: :delete do %>
-                    Remove from cart
-                <% end %>
-            <% else %>
-                <%= form_with url: carts_path, method: :post do %>
-                    <%= hidden_field_tag(:id, @product.id) %>
-                    <%= button_tag 'Add to Cart', class: "btn btn-primary" %>
-                <% end %>
-                <%# Checkout %>
-                <div class="text-center">
-                    <%= form_with url: checkout_create_path, remote: true do %>
-                        <%= hidden_field_tag(:product_id, @product.id) %>
-                        <%= button_tag 'Buy Now 💳' %>
-                    <% end %>
+            <%# if cart.include?(@product) %>
+                <%#= button_to cart_path(@product), class:"btn btn-primary", method: :delete do %>
+                    <%# Remove from cart %>
+                <%# end %>
+            <%# else %>
+            <%= form_with url: carts_path, method: :post do %>
+                <%= hidden_field_tag(:id, @product.id) %>
+                <div class="row d-flex align-items-center pb-3">
+                    <div class="col-1">
+                        Quantity:
+                    </div>
+                <div class="col-1" size="100">
+                    <select name="quantity" class="form-select" aria-label="quantity" style="width: 58px;">
+                        <option selected value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
                 </div>
+                </div>
+                <%= button_tag 'Add to Cart', class: "btn btn-primary" %>
             <% end %>
+            <div class="pt-2">
+                <%= form_with url: checkout_create_path, remote: true do %>
+                    <%= hidden_field_tag(:product_id, @product.id) %>
+                    <%= button_tag 'Buy Now', class: "btn btn-warning" %>
+                <% end %>
+            </div>
+            <%# end %>
         </div>
         <% if flash[:notice] %>
-        <p class="text-danger pt-2">
+        <p class="text-danger pt-2 mb-0">
         <%= flash[:notice] %>
         </p>
         <% end %>

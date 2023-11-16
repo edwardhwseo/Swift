@@ -1,14 +1,20 @@
 class CartsController < ApplicationController
     def index
-        @products = Product.where(id: session[:shopping_cart]).order(:id).page params[:page]
+        product_ids = session[:shopping_cart].keys
+        @products = Product.where(id: product_ids).order(:id).page params[:page]
     end
 
     #POST /carts
     def create
-        # log product id to the terminal logger
-        #logger.debug("Adding #{params[:id]} to cart")
         id = params[:id].to_i
-        session[:shopping_cart] << id unless session[:shopping_cart].include?(id) # Pushes id onto the end of array
+        quantity = params[:quantity].to_i
+
+        if session[:shopping_cart].key?(id)
+            session[:shopping_cart][id] += quantity
+        else
+            session[:shopping_cart][id] = quantity
+        end
+        
         product = Product.find(id)
         flash[:notice] = "*#{product.name} added to cart"
         session[:return_to] = product_path(product)
@@ -17,12 +23,10 @@ class CartsController < ApplicationController
 
     # DELETE /carts/:id
     def destroy
-        #logger.debug("removing #{params[:id]} from cart.")
-        id = params[:id].to_i
-        session[:shopping_cart].delete(id)
+        id = params[:id]
         product = Product.find(id)
-        flash[:notice] = "*#{product.name} removed from cart"
-        session[:return] = product_path(product)
-        redirect_to session[:return]
+        session[:shopping_cart].delete(id)
+        # flash[:notice] = "*#{product.name} removed from cart"
+        redirect_to carts_path
     end
 end

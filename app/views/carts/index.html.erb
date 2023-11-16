@@ -6,11 +6,11 @@
       </ol>
   </nav>
 </div>
-<% if cart.present? %>
+<% if !cart.blank? %>
     <div class="d-flex justify-content-center pb-4">
         <h2>Your Swift Cart</h2>
     </div>
-    <%= render partial: 'common/product' %>
+    <%= render partial: 'common/cart_product' %>
 <% else %>
     <div class="text-center pb-4">
         <h4>Your Swift Cart is empty</h4>
