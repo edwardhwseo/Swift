@@ -7,18 +7,18 @@
   </nav>
 </div>
 <% if !cart.blank? %>
-    <div class="d-flex justify-content-center pb-4">
+    <div class="text-center pb-4">
         <h2>Your Swift Cart</h2>
     </div>
     <%= render partial: 'common/cart_product' %>
     <%# Checkout %>
-    <div class="pt-2">
+    <div class="text-center pb-4">
         <%= form_with url: checkout_create_path, remote: true do %>
-            <%= button_tag 'Checkout', class: "btn btn-warning" %>
+            <%= button_tag 'Proceed to Checkout', class: "btn btn-warning" %>
         <% end %>
     </div>
 <% else %>
-    <div class="text-center pb-4">
+    <div class="text-center pb-5">
         <h4>Your Swift Cart is empty</h4>
         <a href="/pages/3" class="text-decoration-none">Shop today's deals</a>
     </div>
