@@ -1,23 +1,24 @@
 class CheckoutController < ApplicationController
     def create
+      if(params[:product_id].present?)
         product = Product.find(params[:product_id])
 
         if product.nil?
           redirect_to root_path
           return
         end
-        
+  
         if product.sale_price < product.price
             price_cents = (product.sale_price * 100).to_i
         else
             price_cents = (product.price * 100).to_i
         end
-
+  
         @session = Stripe::Checkout::Session.create(
           payment_method_types: ['card'],
           mode: 'payment',
           success_url: checkout_success_url + '?session_id={CHECKOUT_SESSION_ID}',
-          cancel_url: checkout_cancel_url,
+          cancel_url: checkout_cancel_url,   
           line_items: [
             {
               price_data: {
@@ -43,6 +44,56 @@ class CheckoutController < ApplicationController
             }
           ]
         )
+      else
+        product_ids = session[:shopping_cart].keys
+        products = Product.where(id: product_ids)
+        line_items = []
+
+        products.each do |product|
+          product_id = product.id.to_s
+
+          if product.sale_price < product.price
+              price_cents = (product.sale_price * 100).to_i
+          else
+              price_cents = (product.price * 100).to_i
+          end
+
+          line_items << {
+            price_data: {
+              currency: 'cad',
+              product_data: {
+                name: product.name,
+                description: product.description
+              },
+              
+              unit_amount: price_cents
+            },
+            quantity: session[:shopping_cart][product_id].to_i
+          }
+        end
+
+        line_items << {
+          price_data: {
+            currency: 'cad',
+            product_data: {
+              name: 'GST',
+              description: 'Goods and Services Tax'
+            },
+
+            unit_amount: (line_items.sum { |item| item[:price_data][:unit_amount] * item[:quantity] } * 0.05).to_i
+          },
+
+          quantity: 1
+        }
+
+        @session = Stripe::Checkout::Session.create(
+          payment_method_types: ['card'],
+          mode: 'payment',
+          success_url: checkout_success_url + '?session_id={CHECKOUT_SESSION_ID}',
+          cancel_url: checkout_cancel_url,
+          line_items: line_items
+        )
+      end
 
         # Setting up a Stripe Session for payment
 
@@ -56,6 +107,7 @@ class CheckoutController < ApplicationController
     def success
       @session = Stripe::Checkout::Session.retrieve(params[:session_id])
       @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
+      session.delete(:shopping_cart)
     end
 
     def cancel
