@@ -51,6 +51,14 @@ CSV.foreach(csv_file_path, headers: true) do |row|
     )
 end
 
+User.find_or_create_by(
+    email: 'test@email.com',
+    first_name: 'test',
+    last_name: 'account',
+    phone_number: '123-123-1234',
+    password_digest: 'asd'
+)
+
 if AdminUser.count != 1
     AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 end
