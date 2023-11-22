@@ -13,7 +13,11 @@
         <div>
             <h4><%= @product.name%></h4>
             <h5>$<%= @product.price %></h5>
-            <%= @product.description %>
+            <% if @product.description.to_s.length > 200 %>
+                <%= @product.description[0..150]... %></p>
+            <% else %>
+                <%= @product.description %>
+            <% end %>
         <div class="pt-3">
             <%# if cart.include?(@product) %>
                 <%#= button_to cart_path(@product), class:"btn btn-primary", method: :delete do %>

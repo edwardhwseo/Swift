@@ -1,40 +1,52 @@
-<div class="d-flex justify-content-center flex-wrap border border-top-0 border-bottom-0 pb-3">
-    <% @products.each do |p| %>
-        <div class="card" style="width: 15rem; margin: 10px;">
-            <% if p.image.present? %>
-                <%= link_to image_tag(p.image, :class => "card-img-top img-fixed-height bg-light"), p  %>
+<div class="p-5">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col"><h2>Shopping Cart</h2></th>
+                <th scope="col"></th>
+                <th scope="col">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @products.each do |p| %>
+                <tr>
+                    <td scope="row"><%= link_to image_tag(p.image, :class => "img-fixed-height bg-light"), p  %></td>
+                    <td>
+                        <span class="fw-bold"><%= p.name %></span>
+                        <div class="pt-2 pb-3">
+                            <% product_id = p.id.to_s %>
+                            Quantity: <%= session[:shopping_cart][product_id] %>
+                        </div>
+                        <div>
+                            <%= button_to cart_path(id: p.id), class:"btn btn-outline-primary", method: :delete do %>
+                                Remove from cart
+                            <% end %>
+                        </div>
+                    </td>
+                    <td>
+                        <% if !(p.sale_price < p.price) %>
+                            <small>$<%= p.price %></small>
+                        <% else %>
+                            <small class="bg-danger text-white">&nbsp;<%= ((p.price - p.sale_price) / p.price * 100).round %>% off&nbsp;</small>
+                            <br>
+                            $<%= p.sale_price %> 
+                        <% end %>
+                    </td>
+                </tr>
             <% end %>
-            <div class="card-body">
-                <%= link_to p.name, p, class: "h5 card-title text-decoration-none product" %>
-                <h5 class="mt-2">
-                <% if p.sale_price&.present? && p.price&.present? %>
-                    <% if !(p.sale_price < p.price) %>
-                        <p>$<%= p.price %></p>
-                    <% else %>
-                        <p class="text-danger">$<%= p.sale_price %>[-<%= ((p.price - p.sale_price) / p.price * 100).round %>%]</p>
-                    <% end %>
-                <% else %>
-                <p>Out of Stock</p>
-                <% end %>
-                </h5>
-                <p class="card-text">
-                <% if p.description.to_s.length > 50 %>
-                    <%= p.description[0..50]... %></p>
-                <% else %>
-                    <%= p.description %>
-                <% end %>
-                <div>
-                    <% product_id = p.id.to_s %>
-                    Quantity: <%= session[:shopping_cart][product_id] %>
-                </div>
-                <div class="d-flex justify-content-center pt-3">
-                    <%= button_to cart_path(id: p.id), class:"btn btn-primary", method: :delete do %>
-                        Remove from cart
-                    <% end %>
-                </div>
-            </div>
-        </div>
-    <% end %>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        Subtotal (<%= session[:shopping_cart].size %> items): <span class="fw-bold">$<%= @subtotal %></span>
+                        <br>
+                        GST: <span class="fw-bold">$<%= @gst %></span>
+                        <br>
+                        Total: <span class="fw-bold">$<%= @total %></span>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
 </div>
 
 <%= paginate @products %>

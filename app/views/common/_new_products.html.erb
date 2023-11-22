@@ -11,7 +11,7 @@
                 <% if !(p.sale_price < p.price) %>
                     <p>$<%= p.price %></p>
                 <% else %>
-                    <p class="text-danger">$<%= p.sale_price %>[-<%= ((p.price - p.sale_price) / p.price * 100).round %>%]</p>
+                    $<%= p.sale_price %> <small class="bg-danger text-white">&nbsp;-<%= ((p.price - p.sale_price) / p.price * 100).round %>% off&nbsp;</small>
                 <% end %>
             <% else %>
             <p>Out of Stock</p>
