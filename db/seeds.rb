@@ -12,6 +12,16 @@ Product.delete_all
 Category.delete_all
 Brand.delete_all
 User.delete_all
+Province.delete_all
+
+provinces = {'Ontario' => 'ON', 'Quebec' => 'QC', 'Novascotia' => 'NS',
+    'New Brunswick' => 'NB', 'Manitoba' => 'MB', 'British Columbia' => 'BC',
+    'Prince Edward Island' => 'PE', 'Saskatchewan' => 'SK', 'Alberta' => 'Alberta',
+    'Newfoundland and Labrador' => 'NL'}
+
+provinces.foreach do |province|
+    print(province)
+end
 
 csv_file_path = Rails.root.join('db', 'data.csv')
 image_count = 0
@@ -54,7 +64,7 @@ end
 
 User.find_or_create_by(
     email: 'test@email.com',
-    password_digest: '$2a$12$UhIQEXdq2Rpss/vhvn/IbuD0Fo1tBGsNI2gqLryEUY0f24T2JgPx2'
+    password_digest: '$2a$12$UhIQEXdq2Rpss/vhvn/IbuD0Fo1tBGsNI2gqLryEUY0f24T2JgPx2',
     first_name: 'first_name',
     last_name: 'last_name'
 )
