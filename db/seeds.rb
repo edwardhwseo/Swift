@@ -55,7 +55,8 @@ end
 User.find_or_create_by(
     email: 'test@email.com',
     password_digest: '$2a$12$UhIQEXdq2Rpss/vhvn/IbuD0Fo1tBGsNI2gqLryEUY0f24T2JgPx2'
-
+    first_name: 'first_name',
+    last_name: 'last_name'
 )
 
 if AdminUser.count != 1
