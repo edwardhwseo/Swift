@@ -290,6 +290,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin (~> 2.11)
+  bcrypt (~> 3.1.7)
   bootsnap
   capybara
   debug
