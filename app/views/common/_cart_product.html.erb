@@ -25,11 +25,11 @@
                     </td>
                     <td>
                         <% if !(p.sale_price < p.price) %>
-                            <small>$<%= p.price %></small>
+                            <small>$<%= p.price / 10 %></small>
                         <% else %>
                             <small class="bg-danger text-white">&nbsp;<%= ((p.price - p.sale_price) / p.price * 100).round %>% off&nbsp;</small>
                             <br>
-                            $<%= p.sale_price %> 
+                            $<%= p.sale_price / 10 %> 
                         <% end %>
                     </td>
                 </tr>

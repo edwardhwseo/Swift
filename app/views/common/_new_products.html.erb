@@ -9,9 +9,9 @@
             <h5 class="mt-2">
             <% if p.sale_price&.present? && p.price&.present? %>
                 <% if !(p.sale_price < p.price) %>
-                    <p>$<%= p.price %></p>
+                    <p>$<%= p.price / 10 %></p>
                 <% else %>
-                    $<%= p.sale_price %> <small class="bg-danger text-white">&nbsp;-<%= ((p.price - p.sale_price) / p.price * 100).round %>% off&nbsp;</small>
+                    $<%= p.sale_price / 10 %> <small class="bg-danger text-white">&nbsp;-<%= ((p.price - p.sale_price) / p.price * 100).round %>% off&nbsp;</small>
                 <% end %>
             <% else %>
             <p>Out of Stock</p>
