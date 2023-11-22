@@ -5,6 +5,11 @@ Rails.application.routes.draw do
   root to: 'home#index'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+
+  post '/login', to: 'application#login'
+  post '/logout', to: 'application#logout'
+  post '/register', to: 'application#register'
+
   resources :pages
   get '/products/search', to: 'products#search', as: 'products_search'
   resources :products
