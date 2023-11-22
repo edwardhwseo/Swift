@@ -1,10 +1,15 @@
 <% if !cart.blank? %>
     <%= render partial: 'common/cart_product' %>
     <%# Checkout %>
-    <div class="text-center pb-4">
-        <%= form_with url: checkout_create_path, remote: true do %>
-            <%= button_tag 'Proceed to Checkout', class: "btn btn-warning" %>
-        <% end %>
+    <div class="d-flex justify-content-center">
+        <div class="text-center py-4 mb-5 border w-25">
+            <div class="pb-1">
+                <h5>Total: <span class="fw-bold">$<%= @total %></span></h5>
+            </div>
+            <%= form_with url: checkout_create_path, remote: true do %>
+                <%= button_tag 'Proceed to Checkout', class: "btn btn-warning" %>
+            <% end %>
+        </div>
     </div>
 <% else %>
     <div class="text-center p-5">
