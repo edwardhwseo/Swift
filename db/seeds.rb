@@ -12,16 +12,16 @@ Product.delete_all
 Category.delete_all
 Brand.delete_all
 User.delete_all
-Province.delete_all
+# Province.delete_all
 
-provinces = {'Ontario' => 'ON', 'Quebec' => 'QC', 'Novascotia' => 'NS',
-    'New Brunswick' => 'NB', 'Manitoba' => 'MB', 'British Columbia' => 'BC',
-    'Prince Edward Island' => 'PE', 'Saskatchewan' => 'SK', 'Alberta' => 'Alberta',
-    'Newfoundland and Labrador' => 'NL'}
+# provinces = {'Ontario' => 'ON', 'Quebec' => 'QC', 'Novascotia' => 'NS',
+#     'New Brunswick' => 'NB', 'Manitoba' => 'MB', 'British Columbia' => 'BC',
+#     'Prince Edward Island' => 'PE', 'Saskatchewan' => 'SK', 'Alberta' => 'Alberta',
+#     'Newfoundland and Labrador' => 'NL'}
 
-provinces.foreach do |province|
-    print(province)
-end
+# provinces.foreach do |province|
+#     print(province)
+# end
 
 csv_file_path = Rails.root.join('db', 'data.csv')
 image_count = 0
