@@ -14,94 +14,108 @@
     </div>
     <% end %>
     <ul class="navbar-nav">
+    <% if session[:user].present? %>
+      <%= session[:user]['email'] %>
+      <%= form_with(url: logout_path, method: :post) do |form| %>
+        <%= form.submit "Logout", class: "btn btn-primary" %>
+      <% end %>
+    <% end %>
     <%# Sign in Modal %>
-      <li class="nav-item active">
-        <a class="nav-link text-dark" href="#" data-bs-toggle="modal" data-bs-target="#modalLoginForm"><i class="bi bi-person mx-1"></i>Sign In</a>
-      </li>
-      <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header text-center">
-              <h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+    <%= form_with(url: login_path, method: :post) do |form| %>
+    <li class="nav-item active">
+      <a class="nav-link text-dark" href="#" data-bs-toggle="modal" data-bs-target="#modalLoginForm">
+        <i class="bi bi-person mx-1"></i>Sign In
+      </a>
+    </li>
+    <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body mx-3">
+            <div class="md-form mb-5">
+              <%= form.email_field :email, class: "form-control", required: true %>
+              <%= form.label :email, "Email" %>
             </div>
-            <div class="modal-body mx-3">
-              <div class="md-form mb-5">
-                <input type="email" id="defaultForm-email" class="form-control validate">
-                <label data-error="wrong" data-success="right" for="defaultForm-email">Email</label>
-              </div>
-              <div class="md-form mb-4">
-                <input type="password" id="defaultForm-pass" class="form-control validate">
-                <label data-error="wrong" data-success="right" for="defaultForm-pass">Password</label>
-              </div>
-              <div class="text-center">
-                <small>New customer? <a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#modalRegisterForm">Start here.</a></small>
-              </div>
+            <div class="md-form mb-4">
+              <%= form.password_field :password, class: "form-control", required: true %>
+              <%= form.label :password, "Password" %>
+            </div>
+            <div class="text-center">
+              <small>New customer?
+                <a href="#" class="text-decoration-none" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modalRegisterForm">Start here.</a>
+              </small>
             </div>
             <div class="modal-footer d-flex justify-content-center">
-              <button class="btn btn-default">Login</button>
+              <%= form.submit "Login", class: "btn btn-primary" %>
             </div>
           </div>
         </div>
       </div>
+    </div>
+    <% end %>
 
-      <%# Register Modal %>
-
-      <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header text-center">
-              <h4 class="modal-title w-100 font-weight-bold">Create account</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+    <%# Register Modal %>
+    <%= form_with(url: register_path, method: :post) do |form| %>
+    <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <h4 class="modal-title w-100 font-weight-bold">Create account</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body mx-3">
+            <div class="md-form mb-5">
+              <i class="fas fa-user prefix grey-text"></i>
+              <%= form.text_field :first_name, class: "form-control", required: true %>
+              <%= form.label :first_name %>
             </div>
-            <div class="modal-body mx-3">
-              <div class="md-form mb-5">
-                <i class="fas fa-user prefix grey-text"></i>
-                <input type="text" id="orangeForm-firstname" class="form-control validate">
-                <label data-error="wrong" data-success="right" for="orangeForm-firstname">First name</label>
-              </div>
-              <div class="md-form mb-5">
-                <i class="fas fa-user prefix grey-text"></i>
-                <input type="text" id="orangeForm-lastname" class="form-control validate">
-                <label data-error="wrong" data-success="right" for="orangeForm-lastname">Last name</label>
-              </div>
-              <div class="md-form mb-5">
-                <i class="fas fa-envelope prefix grey-text"></i>
-                <input type="email" id="orangeForm-email" class="form-control validate">
-                <label data-error="wrong" data-success="right" for="orangeForm-email">Email</label>
-              </div>
-              <div class="md-form mb-4">
-                <i class="fas fa-lock prefix grey-text"></i>
-                <input type="password" id="orangeForm-pass" class="form-control validate">
-                <label data-error="wrong" data-success="right" for="orangeForm-pass">Password</label>
-              </div>
+            <div class="md-form mb-5">
+              <i class="fas fa-user prefix grey-text"></i>
+              <%= form.text_field :last_name, class: "form-control", required: true %>
+              <%= form.label :last_name %>
             </div>
-            <div class="modal-footer d-flex justify-content-center">
-              <button class="btn btn-deep-orange">Sign up</button>
+            <div class="md-form mb-5">
+              <i class="fas fa-envelope prefix grey-text"></i>
+              <%= form.email_field :email, class: "form-control", required: true %>
+              <%= form.label :email, "Email" %>
             </div>
+            <div class="md-form mb-4">
+              <i class="fas fa-lock prefix grey-text"></i>
+              <%= form.password_field :password, class: "form-control", required: true %>
+              <%= form.label :password, "Password" %>
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <button class="btn btn-deep-orange">Sign up</button>
           </div>
         </div>
       </div>
+    </div>
+    <% end %>
 
-      <%# Cart %>
-      <li class="nav-item">
-        <a class="nav-link text-dark" href="/carts"><i class="bi bi-cart me-1"></i>Cart
-          <% if cart.blank? %>
-            <sup>
-              <strong>&nbsp;&nbsp;</strong>
-            </sup>
-          <% else %>
-            <sup>
-              <strong class="text-warning"><%= cart.size %></strong>
-            </sup>
-          <% end %>
-        </a>
-      </li>
-    </ul>
+
+    <%# Cart %>
+    <li class="nav-item">
+      <a class="nav-link text-dark" href="/carts"><i class="bi bi-cart me-1"></i>Cart
+        <% if cart.blank? %>
+          <sup>
+            <strong>&nbsp;&nbsp;</strong>
+          </sup>
+        <% else %>
+          <sup>
+            <strong class="text-warning"><%= cart.size %></strong>
+          </sup>
+        <% end %>
+      </a>
+    </li>
+  </ul>
 </nav>
 
 <nav class="navbar navbar-expand-lg navbar-light d-flex justify-content-center p-0 border-top" style="background-color: rgba(18, 18, 18, 1)">
@@ -127,3 +141,15 @@
       <% end %>
     </ul>
 </nav>
+
+<script>
+  $(document).ready(function() {
+    $('a[data-bs-dismiss="modal"][data-bs-toggle="modal"][data-bs-target="#modalRegisterForm"]').on('click', function() {
+      $('#modalLoginForm').modal('hide');
+
+      $('#modalLoginForm').on('hidden.bs.modal', function () {
+        $('#modalRegisterForm').modal('show');
+      });
+    });
+  });
+</script>
