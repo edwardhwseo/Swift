@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     post 'purchase', to: 'checkout#purchase', as: 'checkout_purchase'
     get 'cancel', to: 'checkout#cancel', as: 'checkout_cancel'
     get 'success', to: 'checkout#success', as: 'checkout_success'
+    get 'index', to: 'checkout#index', as: 'checkout_index'
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

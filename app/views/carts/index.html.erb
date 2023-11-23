@@ -6,9 +6,10 @@
             <div class="pb-1">
                 <h5>Total: <span class="fw-bold">$<%= @total %></span></h5>
             </div>
-            <%= form_with url: checkout_create_path, remote: true do %>
-                <%= button_tag 'Proceed to Checkout', class: "btn btn-warning" %>
-            <% end %>
+            <a href="checkout/index" class="btn btn-warning">Proceed to Checkout</a>
+            <%#= form_with url: checkout_create_path, remote: true do %>
+                <%#= button_tag 'Proceed to Checkout', class: "btn btn-warning" %>
+            <%# end %>
         </div>
     </div>
 <% else %>

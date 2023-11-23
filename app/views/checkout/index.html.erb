@@ -1,0 +1,50 @@
+<div class="mx-auto mt-3" style="width: 1280px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb m-0">
+            <li class="breadcrumb-item"><a class="text-decoration-none" href="/carts">Cart</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+        </ol>
+    </nav>
+</div>
+<div>
+    <h2 class="text-center pb-4">Shipping Information</h2>
+</div>
+<div class="mx-auto" style="width: 1000px;">
+    <%= form_with url: checkout_create_path, remote: true do |form| %>
+    <div class="form-group mb-2">
+        <%= form.label :first_name, class: "pb-1" %>
+        <%= form.text_field :first_name, class: "form-control" %>
+    </div>
+    <div class="form-group mb-2">
+        <%= form.label :last_name, class: "pb-1" %>
+        <%= form.text_field :last_name, class: "form-control" %>
+    </div>
+    <div class="form-group mb-2">
+        <%= form.label :email, class: "pb-1" %>
+        <%= form.email_field :email, class: "form-control" %>
+    </div>
+    <div class="form-group mb-2">
+        <%= form.label :address, class: "pb-1" %>
+        <%= form.text_field :address, class: "form-control" %>
+    </div>
+    <div class="form-group mb-2">
+        <%= form.label :province, class: "pb-1" %>
+        <%= form.select :province, ['Alberta',
+                                    'British Columbia',
+                                    'Manitoba',
+                                    'Newfoundland and Labrador',
+                                    'New Brunswick',
+                                    'Northwest Territories',
+                                    'Nova Scotia',
+                                    'Nunavut',
+                                    'Ontario',
+                                    'Prince Edward Island',
+                                    'Quebec',
+                                    'Saskatchewan',
+                                    'Yukon'], { prompt: 'Select province' }, class: "form-control" %>
+    </div>
+    <div class="text-center pt-2 pb-5">
+        <%= button_tag 'Place order', class: "btn btn-warning" %>
+    </div>
+    <% end %>
+</div>

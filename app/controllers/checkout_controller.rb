@@ -1,4 +1,25 @@
 class CheckoutController < ApplicationController
+  def index
+    product_ids = session[:shopping_cart].keys
+    @products = Product.where(id: product_ids).order(:id).page params[:page]
+
+    @subtotal = 0
+    @products.each do |p|
+        product_id = p.id.to_s
+
+        if p.sale_price < p.price
+            price = p.sale_price
+        else
+            price = p.price
+        end
+
+        @subtotal += price * session[:shopping_cart][product_id]
+    end
+
+    @gst = sprintf('%.2f', @subtotal * 0.05).to_f
+    @total = @subtotal + @gst
+  end
+
     def create
       if(params[:product_id].present?)
         product = Product.find(params[:product_id])
