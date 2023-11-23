@@ -14,15 +14,15 @@
         <%= form_with url: checkout_create_path, remote: true do |form| %>
         <div class="form-group mb-2">
             <%= form.label :first_name, class: "pb-1" %>
-            <%= form.text_field :first_name, class: "form-control" %>
+            <%= form.text_field :first_name, class: "form-control", value: session[:user]['first_name'] %>
         </div>
         <div class="form-group mb-2">
             <%= form.label :last_name, class: "pb-1" %>
-            <%= form.text_field :last_name, class: "form-control" %>
+            <%= form.text_field :last_name, class: "form-control", value: session[:user]['last_name'] %>
         </div>
         <div class="form-group mb-2">
             <%= form.label :email, class: "pb-1" %>
-            <%= form.email_field :email, class: "form-control" %>
+            <%= form.email_field :email, class: "form-control", value: session[:user]['email'] %>
         </div>
         <div class="form-group mb-2">
             <%= form.label :address, class: "pb-1" %>
