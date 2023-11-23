@@ -74,15 +74,15 @@ if product_seed == true
     end
 end
 
-# manitoba = Province.find_by(name: 'Manitoba')
-# User.find_or_create_by(
-#     email: 'test@email.com',
-#     password_digest: '$2a$12$UhIQEXdq2Rpss/vhvn/IbuD0Fo1tBGsNI2gqLryEUY0f24T2JgPx2',
-#     first_name: 'first_name',
-#     last_name: 'last_name',
-#     # address: '160 Princess Street',
-#     # province: manitoba
-# )
+manitoba = Province.find_by(name: 'Manitoba')
+User.find_or_create_by(
+    email: 'test@email.com',
+    password_digest: '$2a$12$UhIQEXdq2Rpss/vhvn/IbuD0Fo1tBGsNI2gqLryEUY0f24T2JgPx2',
+    first_name: 'test first_name',
+    last_name: 'test last_name',
+    address: '160 Princess Street',
+    province_id: manitoba
+)
 
 if AdminUser.count != 1
     AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
