@@ -107,6 +107,20 @@ class CheckoutController < ApplicationController
           quantity: 1
         }
 
+        # line_items << {
+        #   price_data: {
+        #     currency: 'cad',
+        #     product_data: {
+        #       name: 'PST',
+        #       description: 'Provincial Sales Tax'
+        #     },
+
+        #     unit_amount: (line_items.sum { |item| item[:price_data][:unit_amount] * item[:quantity] } * 0.05).to_i
+        #   },
+
+        #   quantity: 1
+        # }
+
         @session = Stripe::Checkout::Session.create(
           payment_method_types: ['card'],
           mode: 'payment',
