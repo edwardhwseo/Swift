@@ -10,8 +10,6 @@ class ApplicationController < ActionController::Base
 
     def login
         user = User.find_by(email: params[:email])
-
-        puts(user.authenticate_password(params[:password]))
         if user && user.authenticate_password(params[:password])
             session[:user] = user
             redirect_to root_path, notice: 'Logged in successfully!'
