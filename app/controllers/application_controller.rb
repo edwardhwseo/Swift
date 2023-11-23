@@ -10,11 +10,12 @@ class ApplicationController < ActionController::Base
 
     def login
         user = User.find_by(email: params[:email])
-        session[:user] = user
-        if user && user.authenticate(params[:password])
+
+        puts(user.authenticate_password(params[:password]))
+        if user && user.authenticate_password(params[:password])
+            session[:user] = user
             redirect_to root_path, notice: 'Logged in successfully!'
         else
-            flash.now[:alert] = 'Invalid email or password'
             redirect_to root_path, notice: 'Login failed'
         end
     end
@@ -49,6 +50,6 @@ class ApplicationController < ActionController::Base
     end
 
     def user_params
-        params.permit(:email, :password, :first_name, :last_name)
+        params.permit(:email, :password, :first_name, :last_name, :address, :province_id)
     end
 end
