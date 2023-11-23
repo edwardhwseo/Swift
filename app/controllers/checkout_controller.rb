@@ -17,6 +17,8 @@ class CheckoutController < ApplicationController
     end
 
     @gst = sprintf('%.2f', @subtotal * 0.05).to_f
+    @pstOrHst = sprintf('%.2f', @subtotal * Province.find(session[:user]['province_id']).PST).to_f
+    @taxes = sprintf('%.2f', @gst + @pstOrHst)
     @total = @subtotal + @gst
   end
 
@@ -107,19 +109,21 @@ class CheckoutController < ApplicationController
           quantity: 1
         }
 
-        # line_items << {
-        #   price_data: {
-        #     currency: 'cad',
-        #     product_data: {
-        #       name: 'PST',
-        #       description: 'Provincial Sales Tax'
-        #     },
+        pst = Province.find(session[:user]['province_id']).PST
 
-        #     unit_amount: (line_items.sum { |item| item[:price_data][:unit_amount] * item[:quantity] } * 0.05).to_i
-        #   },
+        line_items << {
+          price_data: {
+            currency: 'cad',
+            product_data: {
+              name: 'PST/HST',
+              description: 'Provincial/Harmonized Sales Tax'
+            },
 
-        #   quantity: 1
-        # }
+            unit_amount: (line_items.sum { |item| item[:price_data][:unit_amount] * item[:quantity] } * pst).to_i
+          },
+
+          quantity: 1
+        }
 
         @session = Stripe::Checkout::Session.create(
           payment_method_types: ['card'],

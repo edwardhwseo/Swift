@@ -12,11 +12,11 @@ require 'csv'
 User.delete_all
 Province.delete_all
 
-provinces = {'Ontario' => {'abbr' => 'ON', 'PST' => 1.08}, 'Quebec' => {'abbr' => 'QC', 'PST' => 1.09975},
-    'Novascotia' => {'abbr' => 'NS', 'PST' => 1.10}, 'New Brunswick' => {'abbr' => 'NB', 'PST' => 1.10},
-    'Manitoba' => {'abbr' => 'MB', 'PST' => 1.07}, 'British Columbia' => {'abbr' =>'BC', 'PST' => 1.07},
-    'Prince Edward Island' => {'abbr' => 'PE', 'PST' => 0}, 'Saskatchewan' => {'abbr' => 'SK', 'PST' => 1.06},
-    'Alberta' => {'abbr' => 'AB', 'PST' => 0}, 'Newfoundland and Labrador' => {'abbr' => 'NL', 'PST' => 1.10},
+provinces = {'Ontario' => {'abbr' => 'ON', 'PST' => 0.08}, 'Quebec' => {'abbr' => 'QC', 'PST' => 0.09975},
+    'Nova Scotia' => {'abbr' => 'NS', 'PST' => 0.07}, 'New Brunswick' => {'abbr' => 'NB', 'PST' => 0.10},
+    'Manitoba' => {'abbr' => 'MB', 'PST' => 0.07}, 'British Columbia' => {'abbr' =>'BC', 'PST' => 0.07},
+    'Prince Edward Island' => {'abbr' => 'PE', 'PST' => 0.10}, 'Saskatchewan' => {'abbr' => 'SK', 'PST' => 0.06},
+    'Alberta' => {'abbr' => 'AB', 'PST' => 0}, 'Newfoundland and Labrador' => {'abbr' => 'NL', 'PST' => 0.10},
     'Northwest Territories' => {'abbr' => 'NT', 'PST' => 0}, 'Yukon' => {'abbr' => 'YT', 'PST' => 0},
     'Nunavut' => {'abbr' => 'NU', 'PST' => 0}}
 
