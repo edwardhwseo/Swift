@@ -1,20 +1,27 @@
-<% if !cart.blank? %>
-    <%= render partial: 'common/cart_product' %>
-    <%# Checkout %>
-    <div class="d-flex justify-content-center">
-        <div class="text-center py-4 mb-5 border w-25">
-            <div class="pb-1">
-                <h5>Total: <span class="fw-bold">$<%= @total %></span></h5>
+<% if(session[:user].present?) %>
+    <% if !cart.blank? %>
+        <%= render partial: 'common/cart_product' %>
+        <%# Checkout %>
+        <div class="d-flex justify-content-center">
+            <div class="text-center py-4 mb-5 border w-25">
+                <div class="pb-1">
+                    <h5>Total: <span class="fw-bold">$<%= @total %></span></h5>
+                </div>
+                <a href="checkout/index" class="btn btn-warning">Proceed to Checkout</a>
+                <%#= form_with url: checkout_create_path, remote: true do %>
+                    <%#= button_tag 'Proceed to Checkout', class: "btn btn-warning" %>
+                <%# end %>
             </div>
-            <a href="checkout/index" class="btn btn-warning">Proceed to Checkout</a>
-            <%#= form_with url: checkout_create_path, remote: true do %>
-                <%#= button_tag 'Proceed to Checkout', class: "btn btn-warning" %>
-            <%# end %>
         </div>
-    </div>
+    <% else %>
+        <div class="text-center p-5">
+            <h4>Your Shopping Cart is empty</h4>
+            <a href="/pages/3" class="text-decoration-none">Shop today's deals</a>
+        </div>
+    <% end %>
 <% else %>
     <div class="text-center p-5">
-        <h4>Your Shopping Cart is empty</h4>
-        <a href="/pages/3" class="text-decoration-none">Shop today's deals</a>
+        <h4>Please sign in, or create an account.</h4>
+        <a href="/" class="text-decoration-none">Back to home</a>
     </div>
 <% end %>
