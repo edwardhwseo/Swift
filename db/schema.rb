@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_22_181451) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_23_163458) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -120,16 +120,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_22_181451) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "abbr"
+    t.decimal "PST"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "first_name"
     t.string "last_name"
-    t.string "phone_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
+    t.string "address"
+    t.integer "province_id", null: false
+    t.index ["province_id"], name: "index_users_on_province_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -139,4 +142,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_22_181451) do
   add_foreign_key "orders", "users"
   add_foreign_key "products", "brands"
   add_foreign_key "products", "categories"
+  add_foreign_key "users", "provinces"
 end
