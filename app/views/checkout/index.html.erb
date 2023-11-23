@@ -27,7 +27,7 @@
             </div>
             <div class="form-group mb-2">
                 <%= form.label :address, class: "pb-1" %>
-                <%= form.text_field :address, class: "form-control" %>
+                <%= form.text_field :address, class: "form-control", value: session[:user]['address'] %>
             </div>
             <div class="form-group mb-2">
                 <%= form.label :province, class: "pb-1" %>
@@ -43,7 +43,7 @@
                                             'Prince Edward Island',
                                             'Quebec',
                                             'Saskatchewan',
-                                            'Yukon'], { prompt: 'Select province' }, class: "form-control" %>
+                                            'Yukon'], { prompt: 'Select province' }, class: "form-control", required: true %>
             </div>
             <div class="text-center pt-3 pb-5">
                 <%= button_tag 'Place order', class: "btn btn-warning" %>

@@ -68,6 +68,7 @@ class CheckoutController < ApplicationController
           ]
         )
       else
+        session[:address] = params[:address]
         product_ids = session[:shopping_cart].keys
         products = Product.where(id: product_ids)
         line_items = []
@@ -146,6 +147,17 @@ class CheckoutController < ApplicationController
     def success
       @session = Stripe::Checkout::Session.retrieve(params[:session_id])
       @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
+
+      order = Order.create(user_id: session[:user]['id'])
+
+      session[:shopping_cart].each do |product|
+        OrderItem.find_or_create_by(order_id: order.id, product_id: product[0], quantity: product[1])
+      end
+
+      user = User.find(session[:user]['id'])
+      user.address = session[:address]
+      user.save
+
       session.delete(:shopping_cart)
     end
 
