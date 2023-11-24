@@ -19,7 +19,7 @@
                         <td>
                             <ul class="list-unstyled">
                                 <% o.order_items.each do |item| %>
-                                    <li><small><%= item.quantity %>x <%= Product.find(item.product_id).name %></small></li>
+                                    <li class="pb-1"><small><%= item.quantity %>x <%= Product.find(item.product_id).name %></small></li>
                                 <% end %>
                             </ul>
                         </td>

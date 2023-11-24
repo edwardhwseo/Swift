@@ -1,9 +1,9 @@
 <div class="mx-auto mt-3" style="width: 1280px;">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb m-0">
-            <li class="breadcrumb-item"><a class="text-decoration-none" href="/products">Home</a></li>
-            <li class="breadcrumb-item active"><a class="text-decoration-none" href="/categories/<%= @category.id %>"><%= @category.name %></a></li>
-            <li class="breadcrumb-item active" aria-current="page"><%= @product.name %></li>
+            <li class="small breadcrumb-item"><a class="text-decoration-none" href="/products">Home</a></li>
+            <li class="small breadcrumb-item active"><a class="text-decoration-none" href="/categories/<%= @category.id %>"><%= @category.name %></a></li>
+            <li class="small breadcrumb-item active" aria-current="page"><%= @product.name %></li>
         </ol>
     </nav>
     <div class="d-flex justify-content-center border rounded my-4 pt-4 pb-5 px-2">
@@ -14,16 +14,11 @@
             <h4><%= @product.name%></h4>
             <h5>$<%= @product.price %></h5>
             <% if @product.description.to_s.length > 200 %>
-                <%= @product.description[0..150]... %></p>
+                <small><%= @product.description[0..150]... %></small></p>
             <% else %>
-                <%= @product.description %>
+                <small><%= @product.description %></small>
             <% end %>
         <div class="pt-3">
-            <%# if cart.include?(@product) %>
-                <%#= button_to cart_path(@product), class:"btn btn-primary", method: :delete do %>
-                    <%# Remove from cart %>
-                <%# end %>
-            <%# else %>
             <%= form_with url: carts_path, method: :post do %>
                 <%= hidden_field_tag(:id, @product.id) %>
                 <div class="row d-flex align-items-center pb-3">
@@ -40,13 +35,12 @@
                 </div>
                 <%= button_tag 'Add to Cart', class: "btn btn-primary" %>
             <% end %>
-            <div class="pt-2">
+            <%#div class="pt-2">
                 <%= form_with url: checkout_create_path, remote: true do %>
-                    <%= hidden_field_tag(:product_id, @product.id) %>
-                    <%= button_tag 'Buy Now', class: "btn btn-warning" %>
-                <% end %>
-            </div>
-            <%# end %>
+                    <%#= hidden_field_tag(:product_id, @product.id) %>
+                    <%#= button_tag 'Buy Now', class: "btn btn-warning" %>
+                <%# end %>
+            <%#/div> %>
         </div>
         <% if flash[:notice] %>
         <p class="text-danger pt-2 mb-0">

@@ -17,8 +17,8 @@
     <%# Profile Dropdown %>
     <% if session[:user].present? %>
       <div class="dropdown">
-        <button class="btn btn-outline-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Hello, <%= session[:user]['first_name'] %>
+        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-person mx-1"></i><%= session[:user]['first_name'] %>
         </button>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="/pages/7">Orders</a></li>

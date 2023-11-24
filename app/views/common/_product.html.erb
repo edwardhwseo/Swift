@@ -5,7 +5,7 @@
             <%= link_to image_tag(p.image, :class => "card-img-top img-fixed-height bg-light"), p  %>
         <% end %>
         <div class="card-body">
-            <%= link_to p.name, p, class: "h5 card-title text-decoration-none product" %>
+            <%= link_to p.name, p, class: "h6 card-title text-decoration-none product" %>
             <h5 class="mt-2">
             <% if p.sale_price&.present? && p.price&.present? %>
                 <% if !(p.sale_price < p.price) %>
@@ -19,7 +19,8 @@
             </h5>
             <p class="card-text">
             <% if p.description.to_s.length > 50 %>
-                <%= p.description[0..50]... %></p>
+                <small><%= p.description[0..50]... %></small>
+            </p>
             <% else %>
                 <%= p.description %>
             <% end %>
