@@ -20,6 +20,7 @@ class ApplicationController < ActionController::Base
 
     def logout
         session[:user] = nil
+        session.delete(:shopping_cart)
         redirect_to root_path, notice: 'Logged out successfully!'
     end
 
