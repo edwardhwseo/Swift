@@ -1,0 +1,41 @@
+<div class="px-5 pb-5">
+    <% if(@orders.present?) %>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col"><small>Order #</small></th>
+                    <th scope="col"><small>Date</small></th>
+                    <th scope="col"><small>Items</small></th>
+                    <th scope="col"><small>Status</small></th>
+                    <th scope="col"><small>Taxes</small></th>
+                    <th scope="col"><small>Total</small></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @orders.each do |o| %>
+                    <tr>
+                        <td><small><%= o.id %></small></td>
+                        <td><small><%= o.created_at %></small></td>
+                        <td>
+                            <ul class="list-unstyled">
+                                <% o.order_items.each do |item| %>
+                                    <li><small><%= item.quantity %>x <%= Product.find(item.product_id).name %></small></li>
+                                <% end %>
+                            </ul>
+                        </td>
+                        <td><small>Completed</small></td>
+                        <td><small>$<%= o.tax %></small></td>
+                        <td><small>$<%= o.total %></small></td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    <% else %>
+        <div class="text-center pb-5">
+            <h5>No Past Orders</h5>
+            <a href="/" class="text-decoration-none">Back to home</a>
+        </div>
+    <% end %>
+</div>
+
+<%= paginate @orders %>

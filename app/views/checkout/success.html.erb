@@ -2,9 +2,9 @@
     <div class="d-flex justify-content-center py-2">
         <%= image_tag "success.png", width: "40", height: "auto" %>
     </div>
-    <%= @orders %>
+    <%= @order_total %>
     <h4 class="py-1">Your order was confirmed!</h4>
-    <h6 class="pb-1">Order ID: <%= @session.id %></h6>
+    <h6 class="pb-1">Order ID: <%= @order.id %></h6>
     <p class="pb-1">We have sent your order confirmation and invoice to <%= session[:user]['email'] %></p>
     <div class="d-flex justify-content-center">
         <a href="/pages/3" class="btn btn-outline-dark tex-decoration-none">Continue shopping</a>

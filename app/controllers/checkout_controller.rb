@@ -18,8 +18,10 @@ class CheckoutController < ApplicationController
 
     @gst = sprintf('%.2f', @subtotal * 0.05).to_f
     @pstOrHst = sprintf('%.2f', @subtotal * Province.find(session[:user]['province_id']).PST).to_f
-    @taxes = sprintf('%.2f', @gst + @pstOrHst)
-    @total = @subtotal + @gst
+    @taxes = sprintf('%.2f', @gst + @pstOrHst).to_f
+    @total = @subtotal + @taxes
+
+    session[:taxes] = @taxes
   end
 
     def create
@@ -148,10 +150,12 @@ class CheckoutController < ApplicationController
       @session = Stripe::Checkout::Session.retrieve(params[:session_id])
       @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
 
-      order = Order.create(user_id: session[:user]['id'])
+      amount_total = @session.amount_total / 100
+
+      @order = Order.create(user_id: session[:user]['id'], tax: session[:taxes], total: amount_total)
 
       session[:shopping_cart].each do |product|
-        OrderItem.find_or_create_by(order_id: order.id, product_id: product[0], quantity: product[1])
+        OrderItem.find_or_create_by(order_id: @order.id, product_id: product[0], quantity: product[1])
       end
 
       user = User.find(session[:user]['id'])

@@ -17,8 +17,9 @@ class CartsController < ApplicationController
         end
 
         @gst = sprintf('%.2f', @subtotal * 0.05).to_f
-        @pstOrHst = sprintf('%.2f', @subtotal * Province.find(session[:user]['province_id']).PST)
-        @total = @subtotal + @gst
+        @pstOrHst = sprintf('%.2f', @subtotal * Province.find(session[:user]['province_id']).PST).to_f
+        @taxes = sprintf('%.2f', @gst + @pstOrHst).to_f
+        @total = @subtotal + @taxes
     end
 
     #POST /carts

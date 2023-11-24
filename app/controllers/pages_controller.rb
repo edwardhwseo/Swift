@@ -11,6 +11,7 @@ class PagesController < ApplicationController
     @page = Page.find(params[:id])
     @products = Product.where('sale_price < price').order(:id).page params[:page]
     @new_products = Product.all.order(created_at: :desc).page params[:page]
+    @orders = Order.where(user_id: session[:user]['id']).order(created_at: :desc).page params[:page]
   end
 
   # GET /pages/new

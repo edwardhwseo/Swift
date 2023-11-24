@@ -21,6 +21,7 @@
           Hello, <%= session[:user]['first_name'] %>
         </button>
         <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="/pages/7">Orders</a></li>
           <li><a class="dropdown-item" href="#">Settings</a></li>
           <li>
             <form action="<%= logout_path %>" method="post">
