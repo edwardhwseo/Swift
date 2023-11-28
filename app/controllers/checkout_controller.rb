@@ -16,9 +16,9 @@ class CheckoutController < ApplicationController
         @subtotal += price * session[:shopping_cart][product_id]
     end
 
-    @gst = sprintf('%.2f', @subtotal * 0.05).to_f
-    @pstOrHst = sprintf('%.2f', @subtotal * Province.find(session[:user]['province_id']).PST).to_f
-    @taxes = sprintf('%.2f', @gst + @pstOrHst).to_f
+    @gst = @subtotal * 0.05
+    @pstOrHst = @subtotal * Province.find(session[:user]['province_id']).PST
+    @taxes = @gst + @pstOrHst
     @total = @subtotal + @taxes
 
     session[:taxes] = @taxes
