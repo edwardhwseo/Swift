@@ -30,20 +30,8 @@
                 <%= form.text_field :address, class: "form-control", value: session[:user]['address'] %>
             </div>
             <div class="form-group mb-2">
-                <%= form.label :province, class: "pb-1" %>
-                <%= form.select :province, ['Alberta',
-                                            'British Columbia',
-                                            'Manitoba',
-                                            'Newfoundland and Labrador',
-                                            'New Brunswick',
-                                            'Northwest Territories',
-                                            'Nova Scotia',
-                                            'Nunavut',
-                                            'Ontario',
-                                            'Prince Edward Island',
-                                            'Quebec',
-                                            'Saskatchewan',
-                                            'Yukon'], { prompt: 'Select province' }, class: "form-control", required: true %>
+                <%= form.label :province_id, class: "pb-1" %>
+                <%= form.select :province_id, options_for_select(Province.pluck(:name, :id).map { |name, id| [name, id, { selected: (id == session[:user]['province_id'])}]}), {}, class: "form-control", required: true %>
             </div>
             <div class="text-center pt-3 pb-5">
                 <%= button_tag 'Place order', class: "btn btn-warning" %>
@@ -66,7 +54,7 @@
                                     <small>$<%= number_with_precision(p.price / 10, precision: 2) %></small>
                                 <% else %>
                                     <small class="bg-danger text-white">&nbsp;<%= ((p.price - p.sale_price) / p.price * 100).round %>% off&nbsp;</small>
-                                    $<%= number_with_precision(p.sale_price / 10, precision: 2) %> 
+                                    $<%= number_with_precision(p.sale_price / 10, precision: 2) %>
                                 <% end %>
                             </div>
                         </div>
