@@ -12,9 +12,7 @@ class ApplicationController < ActionController::Base
         user = User.find_by(email: params[:email])
         if user && user.authenticate_password(params[:password])
             session[:user] = user
-            redirect_to root_path, notice: 'Logged in successfully!'
-        else
-            redirect_to root_path, notice: 'Login failed'
+            redirect_to root_path
         end
     end
 
@@ -22,9 +20,7 @@ class ApplicationController < ActionController::Base
         user = User.find_by(email: params[:email])
         if user
             if user.update(user_params)
-                redirect_to root_path, notice: 'Updated successfully!'
-            else
-                flash.now[:alert] = 'Error updating user'
+                redirect_to root_path
             end
         end
     end
@@ -32,15 +28,13 @@ class ApplicationController < ActionController::Base
     def logout
         session[:user] = nil
         session.delete(:shopping_cart)
-        redirect_to root_path, notice: 'Logged out successfully!'
+        redirect_to root_path
     end
 
     def register
         user = User.new(user_params)
         if user.save
-            redirect_to root_path, notice: 'Registered successfully!'
-        else
-            flash.now[:alert] = 'Error registering user'
+            redirect_to root_path
         end
     end
 

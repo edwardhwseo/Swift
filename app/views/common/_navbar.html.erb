@@ -48,8 +48,6 @@
                 <%= form.email_field :email, value: session[:user]['email'], class: "form-control", :readonly => true %>
                 <%= form.label :email, "Email" %>
               </div>
-            </div>
-            <div class="modal-body mx-3">
               <div class="md-form mb-5">
                 <i class="fas fa-user prefix grey-text"></i>
                 <%= form.text_field :first_name, value: session[:user]['first_name'], class: "form-control", required: true %>
