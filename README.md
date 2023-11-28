@@ -4,7 +4,7 @@
 <p align="center">An e-commerce web application written with the Ruby on Rails framework and Bootstrap design toolkit.</p>
 <h2>Features</h2>
   <ul>
-    <li>Cart funtionality</li>
+    <li>Cart functionality</li>
     <li>Checkout process via Stripe</li>
     <li>Consistent UI/UX design</li>
   </ul>
