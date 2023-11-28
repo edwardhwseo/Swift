@@ -8,17 +8,17 @@ class CartsController < ApplicationController
             product_id = p.id.to_s
   
             if p.sale_price < p.price
-                price = p.sale_price
+                price = p.sale_price / 10
             else
-                price = p.price
+                price = p.price / 10
             end
 
             @subtotal += price * session[:shopping_cart][product_id]
         end
 
-        @gst = sprintf('%.2f', @subtotal * 0.05).to_f
-        @pstOrHst = sprintf('%.2f', @subtotal * Province.find(session[:user]['province_id']).PST).to_f
-        @taxes = sprintf('%.2f', @gst + @pstOrHst).to_f
+        @gst = @subtotal * 0.05
+        @pstOrHst = @subtotal * Province.find(session[:user]['province_id']).PST
+        @taxes = @gst + @pstOrHst
         @total = @subtotal + @taxes
     end
 

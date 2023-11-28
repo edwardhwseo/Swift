@@ -12,7 +12,15 @@
         </div>
         <div>
             <h4><%= @product.name%></h4>
-            <h5>$<%= @product.price %></h5>
+            <% if @product.sale_price&.present? && @product.price&.present? %>
+                <% if !(@product.sale_price < @product.price) %>
+                    <p>$<%= number_with_precision(@product.price / 10, precision: 2) %></p>
+                <% else %>
+                    <h5>$<%= number_with_precision(@product.sale_price / 10, precision: 2) %> <small class="bg-danger text-white">&nbsp;-<%= ((@product.price - @product.sale_price) / @product.price * 100).round %>% off&nbsp;</small></h5>
+                <% end %>
+            <% else %>
+                <h6>Out of Stock</h6>
+            <% end %>
             <% if @product.description.to_s.length > 200 %>
                 <small><%= @product.description[0..150]... %></small></p>
             <% else %>

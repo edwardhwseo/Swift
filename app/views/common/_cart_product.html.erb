@@ -25,11 +25,11 @@
                     </td>
                     <td>
                         <% if !(p.sale_price < p.price) %>
-                            <small>$<%= p.price / 10 %></small>
+                            <small>$<%= number_with_precision(p.price / 10, precision: 2) %></small>
                         <% else %>
                             <small class="bg-danger text-white">&nbsp;<%= ((p.price - p.sale_price) / p.price * 100).round %>% off&nbsp;</small>
                             <br>
-                            $<%= p.sale_price / 10 %> 
+                            $<%= number_with_precision(p.sale_price / 10, precision: 2) %> 
                         <% end %>
                     </td>
                 </tr>
@@ -38,13 +38,13 @@
                     <td></td>
                     <td></td>
                     <td>
-                        Subtotal (<%= session[:shopping_cart].size %> items): <span class="fw-bold">$<%= @subtotal %></span>
+                        Subtotal (<%= session[:shopping_cart].size %> items): <span class="fw-bold">$<%= number_with_precision(@subtotal, precision: 2) %></span>
                         <br>
-                        GST: <span class="fw-bold">$<%= @gst %></span>
+                        GST: <span class="fw-bold">$<%= number_with_precision(@gst, precision: 2) %></span>
                         <br>
-                        PST/HST: <span class="fw-bold">$<%= @pstOrHst %></span>
+                        PST/HST: <span class="fw-bold">$<%= number_with_precision(@pstOrHst, precision: 2) %></span>
                         <br>
-                        Total: <span class="fw-bold">$<%= @total %></span>
+                        Total: <span class="fw-bold">$<%= number_with_precision(@total, precision: 2) %></span>
                     </td>
                 </tr>
         </tbody>

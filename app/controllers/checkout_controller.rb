@@ -8,9 +8,9 @@ class CheckoutController < ApplicationController
         product_id = p.id.to_s
 
         if p.sale_price < p.price
-            price = p.sale_price
+            price = p.sale_price / 10
         else
-            price = p.price
+            price = p.price / 10
         end
 
         @subtotal += price * session[:shopping_cart][product_id]
@@ -34,9 +34,9 @@ class CheckoutController < ApplicationController
         end
   
         if product.sale_price < product.price
-            price_cents = (product.sale_price * 100).to_i
+            price_cents = (product.sale_price * 10).to_i
         else
-            price_cents = (product.price * 100).to_i
+            price_cents = (product.price * 10).to_i
         end
   
         @session = Stripe::Checkout::Session.create(
@@ -79,9 +79,9 @@ class CheckoutController < ApplicationController
           product_id = product.id.to_s
 
           if product.sale_price < product.price
-              price_cents = (product.sale_price * 100).to_i
+              price_cents = (product.sale_price * 10).to_i
           else
-              price_cents = (product.price * 100).to_i
+              price_cents = (product.price * 10).to_i
           end
 
           line_items << {

@@ -63,20 +63,20 @@
                                 Quantity: <%= session[:shopping_cart][product_id] %>
                                 <br>
                                 <% if !(p.sale_price < p.price) %>
-                                    <small>$<%= p.price / 10 %></small>
+                                    <small>$<%= number_with_precision(p.price / 10, precision: 2) %></small>
                                 <% else %>
                                     <small class="bg-danger text-white">&nbsp;<%= ((p.price - p.sale_price) / p.price * 100).round %>% off&nbsp;</small>
-                                    $<%= p.sale_price / 10 %> 
+                                    $<%= number_with_precision(p.sale_price / 10, precision: 2) %> 
                                 <% end %>
                             </div>
                         </div>
                     <% end %>
                 <div class="ps-1 pt-1">
-                    <span class="h6 pe-4">Subtotal</span><span class="ps-5">&nbsp;$<%= @subtotal %></span>
+                    <span class="h6 pe-4">Subtotal</span><span class="ps-5">&nbsp;$<%= number_with_precision(@subtotal, precision: 2) %></span>
                     <br>
                     <span class="h6 pe-5">Taxes</span><span class="ps-5">&nbsp;$<%= @taxes %></span>
                     <br>
-                    <span class="h5 pe-5">Total</span><span class="fw-bold ps-5">$<%= @total %></span>
+                    <span class="h5 pe-5">Total</span><span class="fw-bold ps-5">$<%= number_with_precision(@total, precision: 2) %></span>
                 </div>
             </div>
         </div>
