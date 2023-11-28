@@ -10,7 +10,7 @@ require 'csv'
 
 
 User.delete_all
-# Province.delete_all
+Province.delete_all
 
 provinces = {'Ontario' => {'abbr' => 'ON', 'PST' => 0.08}, 'Quebec' => {'abbr' => 'QC', 'PST' => 0.09975},
     'Nova Scotia' => {'abbr' => 'NS', 'PST' => 0.07}, 'New Brunswick' => {'abbr' => 'NB', 'PST' => 0.10},
