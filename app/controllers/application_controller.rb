@@ -18,6 +18,17 @@ class ApplicationController < ActionController::Base
         end
     end
 
+    def update
+        user = User.find_by(email: params[:email])
+        if user
+            if user.update(user_params)
+                redirect_to root_path, notice: 'Updated successfully!'
+            else
+                flash.now[:alert] = 'Error updating user'
+            end
+        end
+    end
+
     def logout
         session[:user] = nil
         session.delete(:shopping_cart)

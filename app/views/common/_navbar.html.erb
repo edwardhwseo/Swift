@@ -22,7 +22,7 @@
         </button>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="/pages/7">Orders</a></li>
-          <li><a class="dropdown-item" href="#">Settings</a></li>
+          <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalAccountForm">Account Details</a></li>
           <li>
             <form action="<%= logout_path %>" method="post">
               <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
@@ -31,45 +31,94 @@
           </li>
         </ul>
       </div>
-    <% end %>
-    <%# Sign in Modal %>
-    <% if(!session[:user]).present? %>
-      <%= form_with(url: login_path, method: :post) do |form| %>
-      <li class="nav-item active">
-        <a class="nav-link text-dark" href="#" data-bs-toggle="modal" data-bs-target="#modalLoginForm">
-          <i class="bi bi-person mx-1"></i>Sign In
-        </a>
-      </li>
-      <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header text-center">
-              <h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body mx-3">
+
+      <%= form_with(url: update_path, method: :post) do |form| %>
+      <div class="modal fade" id="modalAccountForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Account Details</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body mx-3">
+                <div class="md-form mb-5">
+                  <%= form.email_field :email, value: session[:user]['email'], class: "form-control", :readonly => true %>
+                  <%= form.label :email, "Email" %>
+                </div>
+                <div class="modal-body mx-3">
               <div class="md-form mb-5">
-                <%= form.email_field :email, class: "form-control", required: true %>
-                <%= form.label :email, "Email" %>
+                <i class="fas fa-user prefix grey-text"></i>
+                <%= form.text_field :first_name, value: session[:user]['first_name'], class: "form-control", required: true %>
+                <%= form.label :first_name %>
+              </div>
+              <div class="md-form mb-5">
+                <i class="fas fa-user prefix grey-text"></i>
+                <%= form.text_field :last_name, value: session[:user]['last_name'], class: "form-control", required: true %>
+                <%= form.label :last_name %>
               </div>
               <div class="md-form mb-4">
+                <i class="fas fa-lock prefix grey-text"></i>
                 <%= form.password_field :password, class: "form-control", required: true %>
                 <%= form.label :password, "Password" %>
               </div>
-              <div class="text-center">
-                <small>New customer?
-                  <a href="#" class="text-decoration-none" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modalRegisterForm">Start here.</a>
-                </small>
+              <div class="md-form mb-4">
+                <i class="fas fa-lock prefix grey-text"></i>
+                <%= form.text_field :address, value: session[:user]['address'], class: "form-control" %>
+                <%= form.label :address, "Address" %>
               </div>
-              <div class="modal-footer d-flex justify-content-center">
-                <%= form.submit "Login", class: "btn btn-primary" %>
+              <div class="md-form mb-4">
+                <%= form.select :province_id, options_for_select(Province.pluck(:name, :id).map { |name, id| [name, id, { selected: (id == session[:user]['province_id'])}]}), {}, class: "form-control", required: true %>
+                <%= form.label :province_id, "Province" %>
+              </div>
+                <div class="modal-footer d-flex justify-content-center">
+                  <%= form.submit "Update Details", class: "btn btn-primary" %>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+        <% end %>
+    <% end %>
+    <%# Sign in Modal %>
+    <% if(!session[:user]).present? %>
+      <%= form_with(url: login_path, method: :post) do |form| %>
+        <li class="nav-item active">
+          <a class="nav-link text-dark" href="#" data-bs-toggle="modal" data-bs-target="#modalLoginForm">
+            <i class="bi bi-person mx-1"></i>Sign In
+          </a>
+        </li>
+        <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body mx-3">
+                <div class="md-form mb-5">
+                  <%= form.email_field :email, class: "form-control", required: true %>
+                  <%= form.label :email, "Email" %>
+                </div>
+                <div class="md-form mb-4">
+                  <%= form.password_field :password, class: "form-control", required: true %>
+                  <%= form.label :password, "Password" %>
+                </div>
+                <div class="text-center">
+                  <small>New customer?
+                    <a href="#" class="text-decoration-none" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modalRegisterForm">Start here.</a>
+                  </small>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                  <%= form.submit "Login", class: "btn btn-primary" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       <% end %>
 
       <%# Register Modal %>
@@ -110,7 +159,7 @@
               <%= form.label :address, "Address" %>
             </div>
             <div class="md-form mb-4">
-              <%= form.select :province_id, options_for_select(Province.pluck(:abbr, :id)), {}, class: "form-control" %>
+              <%= form.select :province_id, options_for_select(Province.pluck(:name, :id)), { prompt: "Select a Province" }, {class: "form-control", required: true} %>
               <%= form.label :province_id, "Province" %>
             </div>
             </div>

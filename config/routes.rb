@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   post '/login', to: 'application#login'
+  post '/update', to: 'application#update'
   post '/logout', to: 'application#logout'
   post '/register', to: 'application#register'
 
