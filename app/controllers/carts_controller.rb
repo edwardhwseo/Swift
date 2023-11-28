@@ -17,9 +17,11 @@ class CartsController < ApplicationController
         end
 
         @gst = @subtotal * 0.05
-        @pstOrHst = @subtotal * Province.find(session[:user]['province_id']).PST
-        @taxes = @gst + @pstOrHst
-        @total = @subtotal + @taxes
+        if(session[:user].present?)
+            @pstOrHst = @subtotal * Province.find(session[:user]['province_id']).PST
+            @taxes = @gst + @pstOrHst
+            @total = @subtotal + @taxes
+        end
     end
 
     #POST /carts
