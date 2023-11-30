@@ -6,7 +6,7 @@ class Product < ApplicationRecord
   validates :name, uniqueness: true, presence: true
   validates :category_id, :brand_id, presence: true
 
-  #has_one_attached :image
+  has_one_attached :img
 
   paginates_per 25
 end
