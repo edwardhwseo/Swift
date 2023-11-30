@@ -8,6 +8,25 @@
 
 require 'csv'
 
+Page.delete_all
+
+about_us = Page.find_or_create_by(
+    name: "About Us",
+    content: "We are a Winnipeg-based company that specializes in selling a variety of products ranging from clothing, active-wear, to furniture. The company started in 2020, with our flagship store located in the heart of the Exchange District. We strive to deliver a unique shopping experience, with a commitment for convenience and excellence."
+)
+contact = Page.find_or_create_by(
+    name: "Contact",
+    content: "If you have any questions or concerns please send us a message!"
+)
+deals = Page.find_or_create_by(
+    name: "Deals",
+    content: ""
+)
+new_products = Page.find_or_create_by(
+    name: "New Products",
+    content: ""
+)
+
 
 User.delete_all
 Province.delete_all

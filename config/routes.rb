@@ -11,6 +11,11 @@ Rails.application.routes.draw do
   post '/logout', to: 'application#logout'
   post '/register', to: 'application#register'
 
+  get 'about_us', to: 'pages#show', id: 1
+  get 'contact', to: 'pages#show', id: 2
+  get 'deals', to: 'pages#show', id: 3
+  get 'new_products', to: 'pages#show', id: 4
+
   resources :pages
   get '/products/search', to: 'products#search', as: 'products_search'
   resources :products
